@@ -1,7 +1,13 @@
 // require necessary packages
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { choices } = require('yargs');
+// const { choices } = require('yargs');
+
+// pulling in classes
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+
 
 const team = [];
 
@@ -54,6 +60,9 @@ const createManager = () => {
       name: 'office',
     }
   ])
+  .then(response => {
+    
+  })
 }
 
 // function to ask engineer questions
@@ -79,13 +88,17 @@ function newEngineer(){
       message: 'Enter employee GitHub username: ',
       name: 'github',
     }
-  ]).then(response) // push to team array
+  ]).then(response => {
+    const engineer = new Engineer(response.name, response.id, response.email, response.github);
+    team.push(engineer);
+    newEmployee();
+  })
 };
 
 // function to ask intern question
 function newIntern(){};
 
-// function to add employee to employee list
+// function to add employee to employee list MAY NOT NEED?
 function addEmployee(){};
 
 // function to initialize app
