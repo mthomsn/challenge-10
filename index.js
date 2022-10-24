@@ -1,12 +1,13 @@
 // require necessary packages
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const { choices } = require('yargs');
 
 // pulling in classes
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+// pulling function to write HTML
+const htmlGenerator = require('./src/page-template');
 
 const team = [];
 
@@ -30,41 +31,9 @@ function newEmployee(){
         newIntern()
         break;
       case 'Done':
-        buildTeam();
+        buildHTML();
         break;
     }
-  })
-}
-
-// function to ask manager questions
-const createManager = () => {
-  inquirer
-  .prompt([
-    {
-      type: 'input',
-      message: 'Enter manager name: ',
-      name: 'name',
-    },
-    {
-      type: 'input',
-      message: 'Enter employee ID: ',
-      name: 'id',
-    },
-    {
-      type: 'input',
-      message: 'Enter email: ',
-      name: 'email',
-    },
-    {
-      type: 'input',
-      message: 'Enter office number: ',
-      name: 'office',
-    }
-  ])
-  .then(response => {
-    const manager = new Manager(response.name, response.id, response.email, response.office);
-    team.push(manager);
-    newEmployee()
   })
 }
 
@@ -130,13 +99,42 @@ function newIntern(){
   })
 };
 
-// function to add employee to employee list MAY NOT NEED?
-function addEmployee(){};
+// function to initialize starting with manager qs
+const init = () => {
+  inquirer
+  .prompt([
+    {
+      type: 'input',
+      message: 'Enter manager name: ',
+      name: 'name',
+    },
+    {
+      type: 'input',
+      message: 'Enter employee ID: ',
+      name: 'id',
+    },
+    {
+      type: 'input',
+      message: 'Enter email: ',
+      name: 'email',
+    },
+    {
+      type: 'input',
+      message: 'Enter office number: ',
+      name: 'office',
+    }
+  ])
+  .then(response => {
+    const manager = new Manager(response.name, response.id, response.email, response.office);
+    team.push(manager);
+    newEmployee()
+  })
+}
+init()
 
-// function to initialize app
-function init(){
-  // call manager function to initialize app?
-  createManager();
-};
-
-// function to write to HTML page
+function buildHTML(){
+  // use fs.writeFile to build HTML
+  fs.writeFile('./dist/team.html', htmlGenerator(team), (err) => {
+    err ? console.log(err) : console.log('done')
+  });
+}

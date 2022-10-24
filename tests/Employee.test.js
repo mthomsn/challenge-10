@@ -1,6 +1,3 @@
-// const { describe } = require('yargs');
-// const { exportAllDeclaration } = require('@babel/types');
-// const { it } = require('node:test');
 const Employee = require('../lib/Employee');
 
 describe('Employee', () => {
