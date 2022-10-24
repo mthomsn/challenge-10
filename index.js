@@ -8,12 +8,12 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-
 const team = [];
 
 // function for creating a new employee
 function newEmployee(){
-  prompt([
+  inquirer
+  .prompt([
     {
       type: 'list',
       choices: ['Engineer', 'Intern', 'Done'],
@@ -38,7 +38,8 @@ function newEmployee(){
 
 // function to ask manager questions
 const createManager = () => {
-  prompt([
+  inquirer
+  .prompt([
     {
       type: 'input',
       message: 'Enter manager name: ',
@@ -61,13 +62,16 @@ const createManager = () => {
     }
   ])
   .then(response => {
-    
+    const manager = new Manager(response.name, response.id, response.email, response.office);
+    team.push(manager);
+    newEmployee()
   })
 }
 
 // function to ask engineer questions
 function newEngineer(){
-  prompt([
+  inquirer
+  .prompt([
     {
       type: 'input',
       message: 'Enter Engineer name: ',
@@ -96,12 +100,43 @@ function newEngineer(){
 };
 
 // function to ask intern question
-function newIntern(){};
+function newIntern(){
+  inquirer
+  .prompt([
+    {
+      type: 'input',
+      message: 'Enter Intern name: ',
+      name: 'name',
+    },
+    {
+      type: 'input',
+      message: 'Enter employee ID: ',
+      name: 'id',
+    },
+    {
+      type: 'input',
+      message: 'Enter intern email: ',
+      name: 'email',
+    },
+    {
+      type: 'input',
+      message: "Enter intern's school",
+      name: 'school',
+    }
+  ]).then(response => {
+    const intern = new Intern(response.name, response.id, response.email, response.school);
+    team.push(intern);
+    newEmployee();
+  })
+};
 
 // function to add employee to employee list MAY NOT NEED?
 function addEmployee(){};
 
 // function to initialize app
-function init(){};
+function init(){
+  // call manager function to initialize app?
+  createManager();
+};
 
 // function to write to HTML page
