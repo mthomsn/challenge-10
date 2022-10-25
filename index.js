@@ -99,7 +99,7 @@ function newIntern(){
   })
 };
 
-// function to initialize starting with manager qs
+// function to initialize starting with manager questions
 const init = () => {
   inquirer
   .prompt([
@@ -127,11 +127,13 @@ const init = () => {
   .then(response => {
     const manager = new Manager(response.name, response.id, response.email, response.office);
     team.push(manager);
-    newEmployee()
+    newEmployee();
   })
 }
 init()
 
+
+// final destination for javascript flow
 function buildHTML(){
   // use fs.writeFile to build HTML
   fs.writeFile('./dist/team.html', htmlGenerator(team), (err) => {
