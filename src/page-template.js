@@ -26,8 +26,8 @@ function createManagerCard(manager){
     <h5 class="card-title name">${manager.name}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
     <p class="card-text id">ID: ${manager.id}</p>
-    <a href="#" class="card-link">Email: ${manager.email}</a>
-    <a href="#" class="card-link">Office: ${manager.office}</a>
+    <a href="mailto:${manager.email}" class="card-link">Email: ${manager.email}</a>
+    <p class="card-text office">Office: ${manager.office}</p>
   </div>
 </div>
   `
@@ -41,8 +41,8 @@ function createEngineerCard(engineer){
     <h5 class="card-title name">${engineer.name}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Engineer</h6>
     <p class="card-text id">ID: ${engineer.id}</p>
-    <a href="#" class="card-link">Email: ${engineer.email}</a>
-    <a href="#" class="card-link">GitHub: ${engineer.github}</a>
+    <a href="mailto:${engineer.email}" class="card-link">Email: ${engineer.email}</a>
+    <a href="https://github.com/${engineer.github}" class="card-link">GitHub: ${engineer.github}</a>
   </div>
 </div>
   `
@@ -56,8 +56,8 @@ function createInternCard(intern){
     <h5 class="card-title name">${intern.name}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Intern</h6>
     <p class="card-text id">ID: ${intern.id}</p>
-    <a href="#" class="card-link">Email: ${intern.email}</a>
-    <a href="#" class="card-link">School: ${intern.school}</a>
+    <a href="mailto:${intern.email}" class="card-link">Email: ${intern.email}</a>
+    <p class="card-text school">School: ${intern.school}</a>
   </div>
 </div>
   `
